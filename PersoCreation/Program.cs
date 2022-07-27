@@ -22,25 +22,34 @@ switch (milieu)
 }
 
 
-Console.WriteLine($"Mon milieu familial :{Environment.NewLine}1 - Je suis fils unique{Environment.NewLine}2 - J'ai un grand frère{Environment.NewLine}3 - j'ai un ou deux petits frères{Environment.NewLine}4 - j'ai une ou deux soeurs{Environment.NewLine}5 - je suis l'ainé d'une famille nombreuse");
+Console.WriteLine($"Mon milieu familial :{Environment.NewLine}1 - Je suis fils unique{Environment.NewLine}2 - J'ai un grand frère/soeur{Environment.NewLine}3 - j'ai un ou deux petits frères/soeurs{Environment.NewLine}4 - je suis le plus jeune d'une famille nombreuse{Environment.NewLine}5 - je suis l'ainé d'une famille nombreuse{Environment.NewLine}6 - je fais partie d'une famille nombreuse");
 
 var famille = Console.ReadLine();
 switch (famille)
 {
     case "1":
         perso.Intellect++;
+        perso.Raisonner++;
         break;
     case "2":
         perso.Vigueur++;
+        perso.CbtMainNue++;
         break;
     case "3":
-        perso.Social++;
+        perso.Habilete++;
+        perso.Commandement++;
         break;
     case "4":
-        perso.Habilete++;
+        perso.Social++;
+        perso.Survie++;
         break;
     case "5":
         perso.Social++;
+        perso.Commandement++;
+        break;
+    case "6":
+        perso.Social++;
+        perso.Perception++;
         break;
 }
 
@@ -116,75 +125,80 @@ switch (age)
 
 Console.WriteLine($"J'exerce la profession de :{Environment.NewLine}1 - Voleur/cambrioleur{Environment.NewLine}2 - Enseignant{Environment.NewLine}3 - Agent de la force publique{Environment.NewLine}4 - Militaire de carrière{Environment.NewLine}5 - Ouvrier/Paysan{Environment.NewLine}6 - Artisan{Environment.NewLine}7 - Commerçant{Environment.NewLine}8 - Bureaucrate{Environment.NewLine}9 - Élu{Environment.NewLine}10 - Rentier{Environment.NewLine}11 - Patron d'entreprise{Environment.NewLine}12 - Aucune (Noble héritier, prérequis : issu d'un milieu aristocratique){Environment.NewLine}13 - Scientifique/Chercheur{Environment.NewLine}14 - Mécanicien");
 
+int ageModifier = 0;
+if (!int.TryParse(age, out ageModifier))
+{
+    ageModifier = 1;
+}
 var emploi = Console.ReadLine();
 switch (emploi)
 {
     case "1":
-        perso.Larcin++;
+        perso.Larcin += ageModifier;
         perso.Perception++;
         perso.Discretion++;
         break;
     case "2":
-        perso.CultureG++;
+        perso.CultureG += ageModifier;
         perso.Persuasion++;
         perso.Raisonner++;
         break;
     case "3":
-        perso.Intimidation++;
+        perso.Intimidation += ageModifier;
         perso.Pistage++;
         perso.Course++;
         break;
     case "4":
-        perso.TirLeger++;
+        perso.TirLeger += ageModifier;
         perso.Camouflage++;
         perso.Commandement++;
         break;
     case "5":
+        perso.Survie += ageModifier;
         perso.CbtMainNue++;
-        perso.Survie++;
         perso.Perception++;
         break;
     case "6":
-        perso.Negociation++;
+        perso.Negociation += ageModifier;
         perso.Mecanique++;
         perso.CultureG++;
         break;
     case "7":
-        perso.Negociation++;
+        perso.Negociation += ageModifier;
         perso.CultureG++;
         perso.Perception++;
         break;
     case "8":
         perso.CultureG++;
-        perso.Falsification++;
+        perso.Falsification += ageModifier;
         perso.Persuasion++;
         break;
     case "9":
         perso.CultureG++;
-        perso.Seduction++;
+        perso.Seduction += ageModifier;
         perso.Protocole++;
         break;
     case "10":
         perso.CultureG++;
-        perso.Negociation++;
+        perso.Negociation += ageModifier;
         perso.Intimidation++;
         break;
     case "11":
         perso.CultureG++;
         perso.Negociation++;
-        perso.Persuasion++;
+        perso.Persuasion += ageModifier;
         break;
     case "12":
-        perso.Protocole++;
+        perso.Protocole += ageModifier;
         perso.CultureG++;
         perso.Seduction++;
         break;
     case "13":
         perso.Science.Add(2);
-        perso.CultureG++;
+        perso.CultureG += ageModifier;
         break;
     case "14":
-        perso.Mecanique++;
+        perso.Mecanique += ageModifier;
         perso.CultureG++;
         perso.CbtArme++;
         break;
