@@ -123,7 +123,7 @@ switch (age)
         break;
 }
 
-Console.WriteLine($"J'exerce la profession de :{Environment.NewLine}1 - Voleur/cambrioleur{Environment.NewLine}2 - Enseignant{Environment.NewLine}3 - Agent de la force publique{Environment.NewLine}4 - Militaire de carrière{Environment.NewLine}5 - Ouvrier/Paysan{Environment.NewLine}6 - Artisan{Environment.NewLine}7 - Commerçant{Environment.NewLine}8 - Bureaucrate{Environment.NewLine}9 - Élu{Environment.NewLine}10 - Rentier{Environment.NewLine}11 - Patron d'entreprise{Environment.NewLine}12 - Aucune (Noble héritier, prérequis : issu d'un milieu aristocratique){Environment.NewLine}13 - Scientifique/Chercheur{Environment.NewLine}14 - Mécanicien");
+Console.WriteLine($"J'exerce la profession de :{Environment.NewLine}1 - Voleur/cambrioleur{Environment.NewLine}2 - Enseignant{Environment.NewLine}3 - Agent de la force publique{Environment.NewLine}4 - Militaire de carrière{Environment.NewLine}5 - Ouvrier/Paysan{Environment.NewLine}6 - Artisan{Environment.NewLine}7 - Commerçant{Environment.NewLine}8 - Bureaucrate{Environment.NewLine}9 - Élu{Environment.NewLine}10 - Rentier{Environment.NewLine}11 - Patron d'entreprise{Environment.NewLine}12 - Aucune (Noble héritier, prérequis : issu d'un milieu aristocratique){Environment.NewLine}13 - Scientifique/Chercheur{Environment.NewLine}14 - Mécanicien{Environment.NewLine}15 - Médecin");
 
 int ageModifier = 0;
 if (!int.TryParse(age, out ageModifier))
@@ -195,13 +195,21 @@ switch (emploi)
         perso.Seduction++;
         break;
     case "13":
-        perso.Science.Add(2);
+        Console.WriteLine(ListSciences());
+        var scienceStr = Console.ReadLine();
+        var science = int.Parse(scienceStr);
+        perso.Science.Add((ScienceEnum)science, 2);
         perso.CultureG += ageModifier;
         break;
     case "14":
         perso.Mecanique += ageModifier;
         perso.CultureG++;
         perso.CbtArme++;
+        break;
+    case "15":
+        perso.Soins += ageModifier;
+        perso.CultureG++;
+        perso.Compatir++;
         break;
 }
 
@@ -210,6 +218,19 @@ perso.LastCalcul();
 Console.WriteLine(perso.ToString());
 Console.ReadLine();
 
+
+
+static string ListSciences()
+{
+    var sb = new StringBuilder();
+    PropertyInfo[] properties = typeof(Perso).GetProperties();
+    foreach (int v in Enum.GetValues(typeof(ScienceEnum)))
+    {
+        sb.AppendLine($"{v} : {Enum.GetName(typeof(ScienceEnum), v)}");
+    }
+    return sb.ToString();
+
+}
 
 public class Perso
 {
@@ -270,6 +291,7 @@ public class Perso
     public int CultureG { get; set; }
     public int Mecanique { get; set; }
     public int Explosif { get; set; }
+    public int Soins { get; set; }
 
     #endregion
 
@@ -321,6 +343,7 @@ public class Perso
         CultureG = 0;
         Mecanique = 0;
         Explosif = 0;
+        Soins = 0;
     }
 
     internal void LastCalcul()
@@ -344,10 +367,10 @@ public class Perso
 
 public class SciencesComp
 {
-    public List<int> Sciences { get; set; }
+    public Dictionary<ScienceEnum, int> Sciences { get; set; }
     public SciencesComp()
     {
-        Sciences = new List<int>();
+        Sciences = new Dictionary<ScienceEnum, int>();
     }
 
     public override string ToString()
@@ -360,9 +383,16 @@ public class SciencesComp
         return sb.ToString();
     }
 
-    public void Add(int science)
+    public void Add(ScienceEnum science, int comp)
     {
-        Sciences.Add(science);
+        if (Sciences.ContainsKey(science))
+        {
+            Sciences[science] += comp;
+        }
+        else
+        {
+            Sciences.Add(science, comp);
+        }
     }
 }
 
@@ -382,4 +412,23 @@ public enum GradeEnum
     Caporal = 2,
     PremiereClasse = 1,
     Soldat = 0
+}
+
+public enum ScienceEnum
+{
+    Biologie = 0,
+    Physique = 1,
+    Chimie = 2,
+    HistoireGeo = 3,
+    Astronomie = 4,
+    Botanique = 5,
+    Geologie = 6,
+    Mecanique = 7,
+    Ethnologie = 8,
+    Economie = 9,
+    Psycologie = 10,
+    Philosophie = 11,
+    Sociologie = 12,
+    Pharmacologie = 13,
+    Electronique = 14
 }
