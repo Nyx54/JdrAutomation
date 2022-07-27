@@ -152,6 +152,7 @@ switch (emploi)
         perso.TirLeger += ageModifier;
         perso.Camouflage++;
         perso.Commandement++;
+        perso.Grade = (GradeEnum)ageModifier;
         break;
     case "5":
         perso.Survie += ageModifier;
@@ -212,7 +213,7 @@ Console.ReadLine();
 
 public class Perso
 {
-    public int Grade { get; set; }
+    public GradeEnum Grade { get; set; }
     public int PV { get; set; }
     public int Chance { get; set; }
     public int Nevrose { get; set; }
@@ -274,7 +275,7 @@ public class Perso
 
     public Perso()
     {
-        Grade = 0;
+        Grade = GradeEnum.Soldat;
         PV = 0;
         Chance = 0;
         Nevrose = 0;
@@ -363,4 +364,22 @@ public class SciencesComp
     {
         Sciences.Add(science);
     }
+}
+
+public enum GradeEnum
+{
+    Colonel = 13,
+    LieutenantColonel = 12,
+    Commandant = 11,
+    Capitaine = 10,
+    Lieutenant = 9,
+    SousLieutenant = 8,
+    Aspirant = 7,
+    AdjudantChef = 6,
+    Adjudant = 5,
+    SergentMajor = 4,
+    Sergent = 3,
+    Caporal = 2,
+    PremiereClasse = 1,
+    Soldat = 0
 }
