@@ -17,7 +17,7 @@ switch (milieu)
         perso.Intellect++;
         break;
     case "4":
-        perso.Social++;
+        perso.Sociabilité++;
         break;
 }
 
@@ -40,15 +40,15 @@ switch (famille)
         perso.Commandement++;
         break;
     case "4":
-        perso.Social++;
+        perso.Sociabilité++;
         perso.Survie++;
         break;
     case "5":
-        perso.Social++;
+        perso.Sociabilité++;
         perso.Commandement++;
         break;
     case "6":
-        perso.Social++;
+        perso.Sociabilité++;
         perso.Perception++;
         break;
 }
@@ -70,12 +70,12 @@ switch (jeunesse)
         break;
     case "3":
         perso.Intellect++;
-        perso.Social++;
+        perso.Sociabilité++;
         perso.CultureG++;
         break;
     case "4":
         perso.Intellect++;
-        perso.Social++;
+        perso.Sociabilité++;
         perso.Protocole++;
         break;
 }
@@ -103,7 +103,7 @@ switch (age)
         break;
     case "3":
         perso.Intellect++;
-        perso.Social++;
+        perso.Sociabilité++;
         perso.CultureG++;
         perso.Raisonner++;
         perso.Perception++;
@@ -112,7 +112,7 @@ switch (age)
         perso.Vigueur--;
         perso.Habilete--;
         perso.Intellect++;
-        perso.Social++;
+        perso.Sociabilité++;
         perso.Protocole++;
         perso.Commandement++;
         perso.CultureG++;
@@ -242,7 +242,7 @@ public class Perso
     #region Attributs
 
     public int Intellect { get; set; }
-    public int Social { get; set; }
+    public int Sociabilité { get; set; }
     public int Habilete { get; set; }
     public int Vigueur { get; set; }
 
@@ -259,7 +259,7 @@ public class Perso
     public int Artillerie { get; set; }
     public int Lancer { get; set; }
 
-    // Social
+    // Sociabilité
     public int Persuasion { get; set; }
     public int Intimidation { get; set; }
     public int Seduction { get; set; }
@@ -303,7 +303,7 @@ public class Perso
         Nevrose = 0;
 
         Intellect = 2;
-        Social = 2;
+        Sociabilité = 2;
         Habilete = 2;
         Vigueur = 2;
 
@@ -350,7 +350,7 @@ public class Perso
     {
         PV = 5 * (Vigueur + Habilete);
         Chance = 6;
-        Nevrose = (Intellect + Social) * 5;
+        Nevrose = (Intellect + Sociabilité) * 5;
     }
 
     public override string ToString()
